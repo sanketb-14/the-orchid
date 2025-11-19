@@ -15,26 +15,37 @@ const authConfig = {
     },
     async signIn({ user, account, profile }) {
       try {
+        console.log('SignIn attempt for:', user.email);
         const existingGuest = await getGuest(user.email);
 
-        if (!existingGuest)
+        if (!existingGuest) {
+          console.log('Creating new guest for:', user.email);
           await createGuest({ email: user.email, fullName: user.name });
+        }
 
         return true;
       } catch(error) {
-        console.log(error);
+        console.error('SignIn error:', error);
         return false;
       }
     },
     async session({ session, user }) {
-      const guest = await getGuest(session.user.email);
-      session.user.guestId = guest.id;
-      return session;
+      try {
+        const guest = await getGuest(session.user.email);
+        session.user.guestId = guest.id;
+        return session;
+      } catch (error) {
+        console.error('Session callback error:', error);
+        // Return session without guestId rather than failing
+        return session;
+      }
     },
   },
   pages: {
     signIn: "/login",
   },
+  // Add debug logging in development
+  debug: process.env.NODE_ENV === 'development',
 };
 
 export const {

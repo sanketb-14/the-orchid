@@ -1,9 +1,10 @@
 "use client";
+
 import { useState, useEffect } from "react";
 
 const ThemeChanger = () => {
   // use theme from local storage if available or set light theme
-  const [theme, setTheme] = useState(
+  const [theme, setTheme] = useState(() =>
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "nord"
   );
 
