@@ -2,7 +2,7 @@ import { unstable_noStore as noStore } from 'next/cache'
 import {getCabins} from '@/app/_lib/data-service'
 import CabinCard from './cabinCard'
 
-const CabinList =async ({params}) => {
+const CabinList = async ({params}) => {
     noStore()
     
     const cabins = await getCabins()
@@ -19,13 +19,11 @@ const CabinList =async ({params}) => {
     }
     if(cabins.length < 1 ) return null
   return (
-    
-          <div className="grid grid-cols-1 md:grid-cols-1 sm:grid-cols-2 gap-12">
-            {updatedCabins.map((cabin) => (
-              <CabinCard cabin={cabin} key={cabin.id} />
-            ))}
-          </div>
-        
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      {updatedCabins.map((cabin) => (
+        <CabinCard cabin={cabin} key={cabin.id} />
+      ))}
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import CabinList from "@/components/CabinList";
 import { Suspense } from "react";
 import Loader from "@/components/Loader";
+import loading from "../loading";
 import Filter from "@/components/FilterRooms";
 import ReservationReminder from "@/components/ReservationReminder";
 // export const revalidate = 3600
@@ -18,10 +19,10 @@ const Page =({searchParams}) => {
 
     return (
       <div>
-        <h1 className="text-4xl mb-5 text-accent font-medium">
+        <h1 className="text-4xl  bg-gradient-to-r from-primary via-purple-600 to-accent bg-clip-text  mb-5 text-transparent font-medium">
           Our Luxury Orchid-Rooms
         </h1>
-        <p className="text-primary text-lg mb-10">
+        <p className="text-base-content text-lg mb-10">
           Cozy yet luxurious Rooms, located right in the heart of the Lonavala city. Imagine waking up to beautiful mountain views, spending your
           days exploring the dark forests around, or just relaxing in your private
           hot tub under the stars. Enjoy nature's beauty in your own little home
@@ -31,7 +32,7 @@ const Page =({searchParams}) => {
         <div className="w-full m-2 flex justify-end ">
           <Filter/>
         </div>
-        <Suspense fallback={<Loader/> } key={params}>
+        <Suspense fallback={<loading/> } key={params}>
         <CabinList params={params}/>
         <ReservationReminder/>
         </Suspense>

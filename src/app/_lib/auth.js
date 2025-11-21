@@ -1,3 +1,4 @@
+// app/_lib/auth.js
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { createGuest, getGuest } from "./data-service";
@@ -36,7 +37,6 @@ const authConfig = {
         return session;
       } catch (error) {
         console.error('Session callback error:', error);
-        // Return session without guestId rather than failing
         return session;
       }
     },
@@ -44,8 +44,11 @@ const authConfig = {
   pages: {
     signIn: "/login",
   },
-  // Add debug logging in development
   debug: process.env.NODE_ENV === 'development',
+  
+  // ADD THESE SETTINGS
+  trustHost: true,
+  useSecureCookies: process.env.NODE_ENV === 'production',
 };
 
 export const {

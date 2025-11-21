@@ -1,19 +1,18 @@
 "use client";
-
 import { useState, useEffect } from "react";
 
 const ThemeChanger = () => {
   // use theme from local storage if available or set light theme
-  const [theme, setTheme] = useState(() =>
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "nord"
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "corporate"
   );
 
   // update state on toggle
   const handleToggle = (e) => {
     if (e.target.checked) {
-      setTheme("sunset");
+      setTheme("night");
     } else {
-      setTheme("nord");
+      setTheme("corporate");
     }
   };
 
@@ -34,7 +33,7 @@ const ThemeChanger = () => {
             type="checkbox"
             onChange={handleToggle}
             // show toggle image based on localstorage theme
-            checked={theme === "nord" ? false : true}
+            checked={theme === "corporate" ? false : true}
           />
 
           {/* sun icon */}
